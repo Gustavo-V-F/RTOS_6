@@ -247,13 +247,14 @@ void vTask_function(void const * argument)
 {
 
   /* USER CODE BEGIN 6 */
+  uint32_t xPrevious_wake_time = osKernelSysTick();
   char *pcTask_name;
   pcTask_name = (char *) argument; 
   /* Infinite loop */
   for(;;)
   {
     printf(pcTask_name);
-    osDelay(200);
+    osDelayUntil(&xPrevious_wake_time, 200);
   }
   osThreadTerminate(osThreadGetId()); /* Not supposed to reach here */
   /* USER CODE END 6 */ 
